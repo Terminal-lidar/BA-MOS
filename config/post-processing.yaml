@@ -1,0 +1,21 @@
+# This file is covered by the LICENSE file in the root of this project.
+# Developed by: Xieyuanli Chen
+# Configuration (specifying all the paths)
+# --------------------------------------------------------------------
+
+# Inputs
+# the root of raw LiDAR scans
+scan_root: 'E:\dataset'
+
+# the root of mos predictions
+mos_pred_root: 'xxxxxx'
+
+# the root of semantic predictions
+semantic_pred_root: 'xxxx'
+
+# Outputs
+split: valid  # choose from (train, valid, test)
+combined_results_root: 'xxxx'
+clean_scan_root: 'clean_scan'
+
+
