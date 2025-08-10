@@ -13,7 +13,8 @@ To address the problem of low segmentation accuracy of moving objects in LiDAR p
 <img width="6281" height="2806" alt="框架" src="https://github.com/user-attachments/assets/ef1f1ac9-ee2f-46d0-92dc-a3dce176a720" />
 
 ### Stage2:
-<img width="5025" height="3675" alt="stage2" src="https://github.com/user-attachments/assets/d54cfdf2-003e-49db-9f53-b43acaf73d5c" />
+<img width="5025" height="1650" alt="二阶段1" src="https://github.com/user-attachments/assets/46fae294-be6c-400b-82ef-611b07fd9418" />
+
 
 ## Installation
 Our environment: Ubuntu 20.04, CUDA 12.2, NVIDIA A40 GPU x 2
@@ -23,7 +24,7 @@ Create a conda env with
 conda env create -f environment.yml
 ```
 ### TorchSparse
-The stage2 training requires installing `torchsparse`. The command is as follows:"
+The stage2 training requires installing `torchsparse`. The command is as follows:
 ```bash
 # Install TorchSparse follow https://github.com/mit-han-lab/torchsparse
 sudo apt install libsparsehash-dev 
@@ -32,8 +33,7 @@ pip install --upgrade git+https://github.com/mit-han-lab/torchsparse.git@v1.4.0
 
 ## Dataset:
 **Download SemanticKITTI** from [official website](http://www.semantic-kitti.org/dataset.html)\
-To get the residual maps as the input of the model during training, run `auto_gen_residual_images.py`.
-
+To get the residual maps as the input of the model during training, run `utils/auto_gen_residual_images.py`.
 The standard data format is as follows:
 ```bash
 DATAROOT
@@ -58,19 +58,20 @@ DATAROOT
 ### Train
 #### Train on Stage 1:
 ```bash
-./scripts/start.sh
+./scripts/train_stage1.sh
 ```
 #### Train on Stage 2:
+Upon finishing the first-stage training, proceed with the second-stage training. Training can only be performed on a single GPU.
 ```bash
-./scripts/start.sh
+./scripts/train_stage2.sh
 ```
 ### Infer and Eval
 - Infer on SemanticKITTI datasets by:
 ```bash
-./scripts/infer.sh
+./scripts/valid.sh
 ```
 - Eval for valid sequences:\
-The evaluation of the datasets in our experiments is conducted using the [semantic-kitti-api](https://github.com/PRBonn/semantic-kitti-api) provided by the authors of the SemanticKITTI benchmark.
+The evaluation of the datasets in our experiments is conducted using the [semantic-kitti-api](https://github.com/PRBonn/semantic-kitti-api) provided by the SemanticKITTI benchmark.
 
 ## Acknowledgments
 We would like to thank the developers of the following open-source projects for providing valuable code and tools that supported this work: [MF-MOS](https://github.com/SCNU-RISLAB/MF-MOS.git), [SalsaNext](https://github.com/TiagoCortinhal/SalsaNext.git), 
